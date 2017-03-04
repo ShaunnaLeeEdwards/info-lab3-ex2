@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+
+
+{% block css %}
+
+<link rel="stylesheet" href="/static/css/contact.css"> 
+
+{% endblock%}
+
+
+
+
+{% block main %}
+
+<h1> Contact Form </h1> <hr>
+
+<div>
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+     <div class="alert alert-success">
+        <ul>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    {% endwith %}
+    
+    <p class = "small"> Fill in this form to contact site owners. </p> <br/>
+    
+    <div>
+       
+       <form action  = "{{ url_for('contact') }}" method = "POST">
+           
+           <div>
+               <label for = "name" class = "small"> Name  </label> <em> (Required) </em>
+               <p class = "small"> Please Enter Your Full Name. </p>
+               <input type = "text" id = "name" name = "fullName"/>
+           </div> <br/>
+           
+
+           <div>
+               <label for = "email" class = "small"> Email </label> <em> (Required) </em>
+               <p class = "small"> Please Enter Your Email Address. </p>
+               <input type = "email" id = "email" name = "email"/>
+           </div> <br/>
+           
+           
+           <div>
+               <label for = "subject" class = "small"> Subject </label> <em> (Required) </em>
+               <p class = "small"> Please Enter the Subject for Your Message. </p>
+               <input type = "text" id = "subject" name = "mail_subject"/>
+           </div> <br/>
+           
+           
+           <div>
+               <label for = "message" class = "small"> Message </label> <em> (Required) </em>
+               <p class = "small"> Please Enter the Message You Would Like to Send. </p>
+              <textarea name = "message" cols = "25" row = "5"> </textarea>
+           </div> <br/>
+           
+           <button type = "submit"> Send </button>
+           
+       </form>
+       
+    </div>
+    
+</div>
+
+{% endblock %}

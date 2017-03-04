@@ -1,0 +1,20 @@
+body
+    {
+        font-size:12px;
+    }
+
+em
+    {
+        font-style: normal;
+        color: red;
+        font-size: 12px;
+        font-weight:bold;
+
+    }
+    
+    
+.small
+    {
+        font-size: 12px;
+        font-weight:bold;
+    }

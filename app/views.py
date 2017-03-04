@@ -6,12 +6,18 @@ This file creates your application.
 """
 
 from app import app
-from flask import render_template, request, redirect, url_for
-
+from flask import render_template, request, redirect, url_for, flash
+from util import sendemail
+import smtplib
+app.secret_key = "myappcode"
 
 ###
 # Routing for your application.
 ###
+
+
+to_name = "SLE"
+to_addr = "myemailaddress@gmail.com"
 
 @app.route('/')
 def home():
@@ -51,7 +57,24 @@ def add_header(response):
 def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
-
+    
+    
+    
+@app.route("/contact", methods=['GET', 'POST'])
+def contact():
+    if request.method == "POST":
+        from_name = request.form["fullName"]
+        from_addr = request.form["email"]
+        subject = request.form["mail_subject"]
+        msg = request.form["message"]
+        sendemail(from_name, from_addr, to_name, to_addr, subject, msg)
+    
+        flash("Your email has been sent!")
+        return redirect(url_for("home"))
+        
+    return render_template("contact.html")
+    
+    
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0",port="8080")
